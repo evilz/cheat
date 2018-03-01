@@ -1,5 +1,6 @@
 // Import React
 import React from "react";
+import * as atomOneDark from "./themes/soat/atom-one-dark.css";
 
 // Import Spectacle Core tags
 import {
@@ -11,27 +12,26 @@ import {
   List,
   Quote,
   Slide,
-  Text
+  Text,
+  Layout,
+  Fill,
+  Fit,
+  Image
+  //Markdown
 } from "spectacle";
 
+import CodeBox from "./CodeBox";
+import Highlight from "react-highlight.js";
+//import Highlight from "react-highlight"
+import docker from "./assets/docker-white.svg";
+
 // Import theme
-import createTheme from "spectacle/lib/themes/default";
+import createTheme, { backgroundImage } from "./themes/soat";
 
 // Require CSS
 require("normalize.css");
 
-const theme = createTheme(
-  {
-    primary: "white",
-    secondary: "#1F2022",
-    tertiary: "#03A9FC",
-    quartenary: "#CECECE"
-  },
-  {
-    primary: "Montserrat",
-    secondary: "Helvetica"
-  }
-);
+const theme = createTheme();
 
 export default class Presentation extends React.Component {
   render() {
@@ -40,63 +40,60 @@ export default class Presentation extends React.Component {
         transition={["zoom", "slide"]}
         transitionDuration={500}
         theme={theme}
+        contentWidth={1800}
+        contentHeight={900}
       >
-        <Slide transition={["zoom"]} bgColor="primary">
-          <CodePane
-            lang="jsx"
-            source="toto"
-            margin="20px auto"
-            overflow="overflow"
-          />
+        <Slide
+          align="center flex-start"
+          transition={["zoom"]}
+          bgColor="bg"
+          bgImage={backgroundImage}
+        >
+        <Layout>
+            <Fill> <Text padding="15px 15px 15px 15px" caps textAlign="left" >Build</Text></Fill>
+            <Fill> <Text padding="15px 15px 15px 15px" caps textAlign="left" >Build</Text></Fill>
+           
+          </Layout>
+          <Layout>
+            <CodeBox description="Create an image from a Dockerfile." language="shell" code='docker build [options] . -t "app/container_name"    # name' />
+            <CodeBox />
+            <CodeBox />
+            <CodeBox />
+          </Layout>
+
+          <Layout>
+            <CodeBox />
+            <CodeBox />
+            <CodeBox />
+            <CodeBox />
+          </Layout>
+
+          <Layout>
+            <CodeBox />
+            <CodeBox />
+            <CodeBox />
+            <CodeBox />
+          </Layout>
+
+          <Layout>
+            <Fill>
+              <CodeBox />
+            </Fill>
+            <Fill>
+              <CodeBox />
+            </Fill>
+          </Layout>
+          <Layout>
+
+            <Fill><Image src={docker} /></Fill>
+            <Fill></Fill>
+            <Fill></Fill>
+            <Fill></Fill>
+            <Fill></Fill>
+        
+          </Layout>
         </Slide>
-        <Slide transition={["zoom"]} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
-          </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
-          </Text>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>
-            Typography
-          </Heading>
-          <Heading size={1} textColor="secondary">
-            Heading 1
-          </Heading>
-          <Heading size={2} textColor="secondary">
-            Heading 2
-          </Heading>
-          <Heading size={3} textColor="secondary">
-            Heading 3
-          </Heading>
-          <Heading size={4} textColor="secondary">
-            Heading 4
-          </Heading>
-          <Heading size={5} textColor="secondary">
-            Heading 5
-          </Heading>
-          <Text size={6} textColor="secondary">
-            Standard text
-          </Text>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>
-            Standard List
-          </Heading>
-          <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
-          </List>
-        </Slide>
-        <Slide transition={["fade"]} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
-        </Slide>
+      
       </Deck>
     );
   }
